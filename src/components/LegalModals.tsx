@@ -34,16 +34,15 @@ export function PrivacyModal({ isOpen, onClose }: ModalProps) {
 
         <div className="mt-6 space-y-4 text-sm text-foreground/80 leading-relaxed">
           <p>
-            Welcome to <strong>ClearDrop</strong>. We take privacy extremely seriously. We are
-            designed from the ground up to minimize data collection and maintain complete
-            confidentiality.
+            Welcome to <strong>Droply</strong>. We take privacy extremely seriously. We are designed
+            from the ground up to minimize data collection and maintain complete confidentiality.
           </p>
 
           <h3 className="font-semibold text-foreground mt-4 text-base">
             We Do Not Keep Your Files
           </h3>
           <p>
-            When you drop a file on ClearDrop, the transmission is peer-to-peer using WebRTC
+            When you drop a file on Droply, the transmission is peer-to-peer using WebRTC
             technology. The file data remains stored safe in your browser's local sandbox memory
             (using Blob buffers) and is streamed directly to the receiver.{" "}
             <strong>Your files never touch our servers.</strong>
@@ -114,7 +113,7 @@ export function TermsModal({ isOpen, onClose }: ModalProps) {
 
         <div className="mt-6 space-y-4 text-sm text-foreground/80 leading-relaxed">
           <p>
-            This website provides <strong>ClearDrop</strong> as a free, decentralized WebRTC-powered
+            This website provides <strong>Droply</strong> as a free, decentralized WebRTC-powered
             file coordination service. By utilizing the service, you agree to these fundamental
             provisions.
           </p>
@@ -132,8 +131,8 @@ export function TermsModal({ isOpen, onClose }: ModalProps) {
           <h3 className="font-semibold text-foreground mt-4 text-base">Permitted Purposes</h3>
           <p>
             You agree not to utilize high-bandwidth streams to orchestrate malicious attacks,
-            distribute illegal content, or violate intellectual property rules. ClearDrop is
-            optimized as an ephemeral backup tool.
+            distribute illegal content, or violate intellectual property rules. Droply is optimized
+            as an ephemeral backup tool.
           </p>
 
           <h3 className="font-semibold text-foreground mt-4 text-base">Disclaimer of Warranty</h3>

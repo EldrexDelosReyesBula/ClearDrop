@@ -18,7 +18,7 @@ import { PrivacyModal, TermsModal, DonationButton } from "@/components/LegalModa
 export const Route = createFileRoute("/features")({
   head: () => ({
     meta: [
-      { title: "ClearDrop — Advanced Features for Ultra-Secure File Transfer" },
+      { title: "Droply — Advanced Features for Ultra-Secure File Transfer" },
       {
         name: "description",
         content:
@@ -29,11 +29,11 @@ export const Route = createFileRoute("/features")({
         content:
           "secure online transfer features, self destruct link sharing, device qr connect, no tracker file sharing, private download buffer",
       },
-      { property: "og:title", content: "ClearDrop — Core Security Sharing Features" },
+      { property: "og:title", content: "Droply — Core Security Sharing Features" },
       {
         property: "og:description",
         content:
-          "All features of ClearDrop are focused purely around speed, secure storage isolation, and zero logs tracking. Read details here.",
+          "All features of Droply are focused purely around speed, secure storage isolation, and zero logs tracking. Read details here.",
       },
       { name: "robots", content: "index, follow" },
     ],
@@ -70,7 +70,7 @@ function FeaturesPage() {
     {
       icon: EyeOff,
       title: "No Tracking Footprint",
-      desc: "Complete privacy. ClearDrop avoids analytics trackers, system metrics collection, user account requirements, cookies, or third-party telemetries.",
+      desc: "Complete privacy. Droply avoids analytics trackers, system metrics collection, user account requirements, cookies, or third-party telemetries.",
     },
     {
       icon: ShieldCheck,
@@ -90,7 +90,7 @@ function FeaturesPage() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-primary shadow-glow">
               <Send className="h-4 w-4 text-primary-foreground" />
             </div>
-            <span className="text-lg font-semibold tracking-tight">ClearDrop</span>
+            <span className="text-lg font-semibold tracking-tight">Droply</span>
           </Link>
           <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
             <Link to="/features" className="text-foreground font-semibold">
@@ -178,7 +178,7 @@ function FeaturesPage() {
                   onClick={() => setMobileMenuOpen(false)}
                   className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-foreground px-4 py-3 text-sm font-semibold text-background transition hover:opacity-90"
                 >
-                  Try ClearDrop Free
+                  Try Droply Free
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -195,8 +195,7 @@ function FeaturesPage() {
             Smarter transfers. Zero trace.
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            Explore why ClearDrop is the ultimate privacy conduit for modern browser-based
-            transfers.
+            Explore why Droply is the ultimate privacy conduit for modern browser-based transfers.
           </p>
         </div>
 
@@ -279,11 +278,11 @@ function FeaturesPage() {
               <div className="flex h-6 w-6 items-center justify-center rounded-md bg-gradient-primary">
                 <Send className="h-3 w-3 text-primary-foreground" />
               </div>
-              <span className="font-medium text-foreground">ClearDrop</span>
+              <span className="font-medium text-foreground">Droply</span>
               <span className="text-muted-foreground">· Fast. Private. Temporary.</span>
             </div>
             <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()} ClearDrop · Part of the LanDecs ecosystem.
+              © {new Date().getFullYear()} Droply · Part of the LanDecs ecosystem.
             </p>
           </div>
 

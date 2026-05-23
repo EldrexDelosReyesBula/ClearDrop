@@ -72,13 +72,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ClearDrop — Fast. Private. Temporary." },
+      { title: "Droply — Fast. Private. Temporary." },
       {
         name: "description",
         content:
-          "Share files instantly and securely. Temporary, encrypted, no accounts. ClearDrop is privacy-first file sharing — reimagined.",
+          "Share files instantly and securely. Temporary, encrypted, no accounts. Droply is privacy-first file sharing — reimagined.",
       },
-      { property: "og:title", content: "ClearDrop — Fast. Private. Temporary." },
+      { property: "og:title", content: "Droply — Fast. Private. Temporary." },
       {
         property: "og:description",
         content: "Temporary, encrypted, browser-based file sharing. No accounts, no tracking.",

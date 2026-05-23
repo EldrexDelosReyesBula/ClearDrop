@@ -52,10 +52,10 @@ function getFileIcon(name: string) {
 export const Route = createFileRoute("/receive/$id")({
   head: () => ({
     meta: [
-      { title: "ClearDrop · Receive file" },
+      { title: "Droply · Receive file" },
       {
         name: "description",
-        content: "Receive a temporary, encrypted file via ClearDrop.",
+        content: "Receive a temporary, encrypted file via Droply.",
       },
     ],
   }),
@@ -268,7 +268,7 @@ function ReceivePage() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-primary shadow-glow">
               <Send className="h-4 w-4 text-primary-foreground" />
             </div>
-            <span className="text-lg font-semibold tracking-tight">ClearDrop</span>
+            <span className="text-lg font-semibold tracking-tight">Droply</span>
           </Link>
           <span className="text-xs text-muted-foreground">Incoming transfer</span>
         </div>
@@ -571,11 +571,11 @@ function ReceivePage() {
               <div className="flex h-6 w-6 items-center justify-center rounded-md bg-gradient-primary">
                 <Send className="h-3 w-3 text-primary-foreground" />
               </div>
-              <span className="font-medium text-foreground">ClearDrop</span>
+              <span className="font-medium text-foreground">Droply</span>
               <span className="text-muted-foreground">· Fast. Private. Temporary.</span>
             </div>
             <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()} ClearDrop · Part of the LanDecs ecosystem.
+              © {new Date().getFullYear()} Droply · Part of the LanDecs ecosystem.
             </p>
           </div>
 
@@ -660,8 +660,8 @@ function ReceivePage() {
                 </span>
               </div>
               <p className="text-xs text-muted-foreground mb-4">
-                ClearDrop is a free project. To support keeping trackers and file-logger databases
-                off the web, consider supporting development.
+                Droply is a free project. To support keeping trackers and file-logger databases off
+                the web, consider supporting development.
               </p>
               <DonationButton className="w-full justify-center text-sm py-3" />
             </div>

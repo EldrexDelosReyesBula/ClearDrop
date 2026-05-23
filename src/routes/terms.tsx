@@ -6,7 +6,7 @@ import { PrivacyModal, TermsModal, DonationButton } from "@/components/LegalModa
 export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
-      { title: "ClearDrop — Terms of Use" },
+      { title: "Droply — Terms of Use" },
       {
         name: "description",
         content: "Decentralized file transport and responsibility details.",
@@ -32,7 +32,7 @@ function TermsPage() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-primary shadow-glow">
               <Send className="h-4 w-4 text-primary-foreground" />
             </div>
-            <span className="text-lg font-semibold tracking-tight">ClearDrop</span>
+            <span className="text-lg font-semibold tracking-tight">Droply</span>
           </Link>
           <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
             <Link to="/features" className="transition hover:text-foreground">
@@ -120,7 +120,7 @@ function TermsPage() {
                   onClick={() => setMobileMenuOpen(false)}
                   className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-foreground px-4 py-3 text-sm font-semibold text-background transition hover:opacity-90"
                 >
-                  Try ClearDrop Free
+                  Try Droply Free
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -137,9 +137,7 @@ function TermsPage() {
           </div>
           <div>
             <h1 className="text-3xl font-extrabold tracking-tight">Terms of Use</h1>
-            <p className="text-sm text-muted-foreground mt-1">
-              Effective: May 2026 · Fullscreen Page
-            </p>
+            <p className="text-sm text-muted-foreground mt-1">Effective: May 2026</p>
           </div>
         </div>
 
@@ -149,9 +147,9 @@ function TermsPage() {
               1. Ephemeral &amp; Serverless Coordination
             </h2>
             <p>
-              This website provides <strong>ClearDrop</strong> as a free, decentralized
-              WebRTC-powered file coordination service. By utilizing the service, you agree to these
-              fundamental provisions.
+              This website provides <strong>Droply</strong> as a free, decentralized WebRTC-powered
+              file coordination service. By utilizing the service, you agree to these fundamental
+              provisions.
             </p>
             <p>
               You acknowledge that files stream directly between browses. Since we do not host or
@@ -167,7 +165,7 @@ function TermsPage() {
             </h2>
             <p>
               You agree not to utilize high-bandwidth streams to orchestrate malicious attacks,
-              distribute illegal content, or violate intellectual property rules. ClearDrop is
+              distribute illegal content, or violate intellectual property rules. Droply is
               conceived as a temporary personal file backup and transfer utility.
             </p>
           </section>
@@ -202,11 +200,11 @@ function TermsPage() {
               <div className="flex h-6 w-6 items-center justify-center rounded-md bg-gradient-primary">
                 <Send className="h-3 w-3 text-primary-foreground" />
               </div>
-              <span className="font-medium text-foreground">ClearDrop</span>
+              <span className="font-medium text-foreground">Droply</span>
               <span className="text-muted-foreground">· Fast. Private. Temporary.</span>
             </div>
             <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()} ClearDrop · Part of the LanDecs ecosystem.
+              © {new Date().getFullYear()} Droply · Part of the LanDecs ecosystem.
             </p>
           </div>
 

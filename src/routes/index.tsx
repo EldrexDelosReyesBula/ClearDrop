@@ -24,7 +24,7 @@ import { PrivacyModal, TermsModal, DonationButton } from "@/components/LegalModa
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "ClearDrop — Fast, Private, Temporary Encrypted File Sharing" },
+      { title: "Droply — Fast, Private, Temporary Encrypted File Sharing" },
       {
         name: "description",
         content:
@@ -35,7 +35,7 @@ export const Route = createFileRoute("/")({
         content:
           "file sharing, WebRTC p2p transfer, secure file drop, private sharing online, anonymous file send, temporary links, no account file share",
       },
-      { property: "og:title", content: "ClearDrop — Secure Browser-Based Ephemeral Shares" },
+      { property: "og:title", content: "Droply — Secure Browser-Based Ephemeral Shares" },
       {
         property: "og:description",
         content:
@@ -63,7 +63,7 @@ function Nav({
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-primary shadow-glow">
             <Send className="h-4 w-4 text-primary-foreground" />
           </div>
-          <span className="text-lg font-semibold tracking-tight">ClearDrop</span>
+          <span className="text-lg font-semibold tracking-tight">Droply</span>
         </Link>
         <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
           <Link to="/features" className="transition hover:text-foreground">
@@ -154,7 +154,7 @@ function Nav({
                 onClick={() => setMobileMenuOpen(false)}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-foreground px-4 py-3 text-sm font-semibold text-background transition hover:opacity-90"
               >
-                Try ClearDrop Free
+                Try Droply Free
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -331,7 +331,7 @@ function Features() {
             Nothing you don't.
           </h2>
           <p className="mt-4 text-muted-foreground">
-            ClearDrop is intentionally light — just the essentials for fast, secure transfers.
+            Droply is intentionally light — just the essentials for fast, secure transfers.
           </p>
         </div>
 
@@ -558,9 +558,8 @@ function Privacy() {
             Privacy without complexity.
           </h2>
           <p className="mt-5 text-lg text-muted-foreground">
-            ClearDrop is designed to transfer files — not collect your data. No accounts. No
-            analytics. No hidden profiles. Just a clean conduit between you and the person on the
-            other side.
+            Droply is designed to transfer files — not collect your data. No accounts. No analytics.
+            No hidden profiles. Just a clean conduit between you and the person on the other side.
           </p>
           <ul className="mt-8 space-y-4 text-sm">
             {[
@@ -648,7 +647,7 @@ function CTA() {
           <span className="text-gradient">Keep your privacy.</span>
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
-          Open ClearDrop in your browser and send your first file in seconds.
+          Open Droply in your browser and send your first file in seconds.
         </p>
         <a
           href="/app"
@@ -676,11 +675,11 @@ function Footer({
             <div className="flex h-6 w-6 items-center justify-center rounded-md bg-gradient-primary">
               <Send className="h-3 w-3 text-primary-foreground" />
             </div>
-            <span className="font-medium text-foreground">ClearDrop</span>
+            <span className="font-medium text-foreground">Droply</span>
             <span className="text-muted-foreground">· Fast. Private. Temporary.</span>
           </div>
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} ClearDrop · Part of the LanDecs ecosystem.
+            © {new Date().getFullYear()} Droply · Part of the LanDecs ecosystem.
           </p>
         </div>
 

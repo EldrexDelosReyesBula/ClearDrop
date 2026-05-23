@@ -54,7 +54,7 @@ import { PrivacyModal, TermsModal, DonationButton } from "@/components/LegalModa
 export const Route = createFileRoute("/app")({
   head: () => ({
     meta: [
-      { title: "ClearDrop · Web App" },
+      { title: "Droply · Web App" },
       {
         name: "description",
         content: "Drop a file. Get a secure link or QR. It self-destructs.",
@@ -522,7 +522,7 @@ function AppPage() {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-primary shadow-glow">
                 <Send className="h-4 w-4 text-primary-foreground" />
               </div>
-              <span className="text-lg font-semibold tracking-tight">ClearDrop</span>
+              <span className="text-lg font-semibold tracking-tight">Droply</span>
             </Link>
             <div className="flex items-center gap-2 flex-wrap">
               <Link
@@ -783,11 +783,11 @@ function AppPage() {
               <div className="flex h-6 w-6 items-center justify-center rounded-md bg-gradient-primary">
                 <Send className="h-3 w-3 text-primary-foreground" />
               </div>
-              <span className="font-medium text-foreground">ClearDrop Dashboard</span>
+              <span className="font-medium text-foreground">Droply Dashboard</span>
               <span className="text-muted-foreground">· Fast. Private. Temporary.</span>
             </div>
             <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()} ClearDrop · Part of the LanDecs ecosystem.
+              © {new Date().getFullYear()} Droply · Part of the LanDecs ecosystem.
             </p>
           </div>
 
@@ -876,7 +876,7 @@ function AppPage() {
                 </span>
               </div>
               <p className="text-xs text-muted-foreground mb-4">
-                Thank you for choosing ClearDrop! To support continuous development and help keep
+                Thank you for choosing Droply! To support continuous development and help keep
                 trackers off peer transactions, consider supporting the author.
               </p>
               <DonationButton className="w-full justify-center text-sm py-3" />
@@ -1044,13 +1044,13 @@ function AppPage() {
                   className="w-full h-20 rounded-xl border border-border bg-card/40 p-2 text-[10px] font-mono outline-none focus:border-primary/60 transition block resize-none placeholder:text-muted-foreground/55"
                 />
                 <p className="text-[9px] text-muted-foreground leading-normal italic text-right select-none">
-                  * Empty falls back to ClearDrop built-in TURN network
+                  * Empty falls back to Droply built-in TURN network
                 </p>
               </div>
 
               <div className="rounded-xl border border-border/40 bg-background/30 p-3 text-xs text-left text-muted-foreground leading-snug space-y-1.5 font-sans">
                 <p>
-                  * ClearDrop utilizes{" "}
+                  * Droply utilizes{" "}
                   <strong className="text-foreground">Google public STUN servers</strong> to
                   discover public WAN IP addresses for real-time direct P2P connection coordinates.
                 </p>

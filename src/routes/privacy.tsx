@@ -6,7 +6,7 @@ import { PrivacyModal, TermsModal, DonationButton } from "@/components/LegalModa
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "ClearDrop — Privacy Policy" },
+      { title: "Droply — Privacy Policy" },
       {
         name: "description",
         content: "Our zero-knowledge, end-to-end encrypted privacy guidelines.",
@@ -32,7 +32,7 @@ function PrivacyPage() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-primary shadow-glow">
               <Send className="h-4 w-4 text-primary-foreground" />
             </div>
-            <span className="text-lg font-semibold tracking-tight">ClearDrop</span>
+            <span className="text-lg font-semibold tracking-tight">Droply</span>
           </Link>
           <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
             <Link to="/features" className="transition hover:text-foreground">
@@ -120,7 +120,7 @@ function PrivacyPage() {
                   onClick={() => setMobileMenuOpen(false)}
                   className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-foreground px-4 py-3 text-sm font-semibold text-background transition hover:opacity-90"
                 >
-                  Try ClearDrop Free
+                  Try Droply Free
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -137,9 +137,7 @@ function PrivacyPage() {
           </div>
           <div>
             <h1 className="text-3xl font-extrabold tracking-tight">Privacy Policy</h1>
-            <p className="text-sm text-muted-foreground mt-1">
-              Last updated: May 2026 · Fullscreen Page
-            </p>
+            <p className="text-sm text-muted-foreground mt-1">Last updated: May 2026</p>
           </div>
         </div>
 
@@ -147,12 +145,12 @@ function PrivacyPage() {
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-foreground">1. Zero-Knowledge File Transfer</h2>
             <p>
-              Welcome to <strong>ClearDrop</strong>. We take privacy extremely seriously. We are
+              Welcome to <strong>Droply</strong>. We take privacy extremely seriously. We are
               designed from the ground up to minimize data collection and maintain complete
               confidentiality.
             </p>
             <p>
-              When you drop a file on ClearDrop, the transmission is peer-to-peer using WebRTC
+              When you drop a file on Droply, the transmission is peer-to-peer using WebRTC
               technology. The file data remains stored safe in your browser's local sandbox memory
               (using Blob buffers) and is streamed directly to the receiver.{" "}
               <strong>Your files never touch our servers.</strong> We have zero-knowledge of the
@@ -212,11 +210,11 @@ function PrivacyPage() {
               <div className="flex h-6 w-6 items-center justify-center rounded-md bg-gradient-primary">
                 <Send className="h-3 w-3 text-primary-foreground" />
               </div>
-              <span className="font-medium text-foreground">ClearDrop</span>
+              <span className="font-medium text-foreground">Droply</span>
               <span className="text-muted-foreground">· Fast. Private. Temporary.</span>
             </div>
             <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()} ClearDrop · Part of the LanDecs ecosystem.
+              © {new Date().getFullYear()} Droply · Part of the LanDecs ecosystem.
             </p>
           </div>
 

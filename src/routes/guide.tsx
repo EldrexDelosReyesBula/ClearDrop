@@ -24,7 +24,7 @@ import { DonationButton } from "@/components/LegalModals";
 export const Route = createFileRoute("/guide")({
   head: () => ({
     meta: [
-      { title: "ClearDrop · How to send a photo" },
+      { title: "Droply · How to send a photo" },
       {
         name: "description",
         content:
@@ -48,7 +48,7 @@ function GuidePage() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-primary shadow-glow">
               <Send className="h-4 w-4 text-primary-foreground" />
             </div>
-            <span className="text-lg font-semibold tracking-tight">ClearDrop</span>
+            <span className="text-lg font-semibold tracking-tight">Droply</span>
           </Link>
           <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
             <Link to="/features" className="transition hover:text-foreground">
@@ -136,7 +136,7 @@ function GuidePage() {
                   onClick={() => setMobileMenuOpen(false)}
                   className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-foreground px-4 py-3 text-sm font-semibold text-background transition hover:opacity-90"
                 >
-                  Try ClearDrop Free
+                  Try Droply Free
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -168,7 +168,7 @@ function GuidePage() {
             subtitle="Best when both phones are next to each other."
             steps={[
               {
-                title: "Open ClearDrop and drop the photo",
+                title: "Open Droply and drop the photo",
                 body: "On the device that has the photo, open the app and drop the image into the big circle.",
                 illo: <IlloDrop />,
               },
@@ -184,7 +184,7 @@ function GuidePage() {
               },
               {
                 title: "Tap 'Receive file'",
-                body: "The photo arrives in a few seconds. It then disappears from ClearDrop automatically.",
+                body: "The photo arrives in a few seconds. It then disappears from Droply automatically.",
                 illo: <IlloReceive />,
               },
             ]}
@@ -204,7 +204,7 @@ function GuidePage() {
               },
               {
                 title: "Drop the photo on the sender",
-                body: "Open ClearDrop on the device with the photo and drop it in.",
+                body: "Open Droply on the device with the photo and drop it in.",
                 illo: <IlloDrop />,
               },
               {
@@ -234,7 +234,7 @@ function GuidePage() {
               },
               {
                 title: "Drop the photo on the sender",
-                body: "Open ClearDrop and drop the image in. A short link appears.",
+                body: "Open Droply and drop the image in. A short link appears.",
                 illo: <IlloDrop />,
               },
               {
@@ -254,7 +254,7 @@ function GuidePage() {
         <div className="mt-16 rounded-3xl border border-border/60 bg-gradient-surface p-8 text-center shadow-soft">
           <h2 className="text-2xl font-semibold">Ready to send something?</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Drop a photo in ClearDrop and pick your favourite way to share.
+            Drop a photo in Droply and pick your favourite way to share.
           </p>
           <Link
             to="/app"
@@ -273,11 +273,11 @@ function GuidePage() {
               <div className="flex h-6 w-6 items-center justify-center rounded-md bg-gradient-primary">
                 <Send className="h-3 w-3 text-primary-foreground" />
               </div>
-              <span className="font-medium text-foreground">ClearDrop</span>
+              <span className="font-medium text-foreground">Droply</span>
               <span className="text-muted-foreground">· Fast. Private. Temporary.</span>
             </div>
             <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()} ClearDrop · Part of the LanDecs ecosystem.
+              © {new Date().getFullYear()} Droply · Part of the LanDecs ecosystem.
             </p>
           </div>
 

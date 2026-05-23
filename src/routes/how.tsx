@@ -21,7 +21,7 @@ import { PrivacyModal, TermsModal, DonationButton } from "@/components/LegalModa
 export const Route = createFileRoute("/how")({
   head: () => ({
     meta: [
-      { title: "ClearDrop — How Direct Peer-to-Peer Encrypted Transfer Works" },
+      { title: "Droply — How Direct Peer-to-Peer Encrypted Transfer Works" },
       {
         name: "description",
         content:
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/how")({
         content:
           "how webRTC works, peer-to-peer transfer tech, ECDH key agreement, AES-GCM 256 file sharing, secure communications sandbox, private browser stream",
       },
-      { property: "og:title", content: "ClearDrop — How Direct Peer Sharing Works" },
+      { property: "og:title", content: "Droply — How Direct Peer Sharing Works" },
       {
         property: "og:description",
         content:
@@ -60,7 +60,7 @@ function HowPage() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-primary shadow-glow">
               <Send className="h-4 w-4 text-primary-foreground" />
             </div>
-            <span className="text-lg font-semibold tracking-tight">ClearDrop</span>
+            <span className="text-lg font-semibold tracking-tight">Droply</span>
           </Link>
           <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
             <Link to="/features" className="transition hover:text-foreground">
@@ -148,7 +148,7 @@ function HowPage() {
                   onClick={() => setMobileMenuOpen(false)}
                   className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-foreground px-4 py-3 text-sm font-semibold text-background transition hover:opacity-90"
                 >
-                  Try ClearDrop Free
+                  Try Droply Free
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -167,8 +167,8 @@ function HowPage() {
             Decentralized. Secure. Direct.
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            ClearDrop isn't a cloud storage cabinet. It's a real-time routing conduit. Below is
-            exactly how your file is protected, bundled, and delivered natively in your browser.
+            Droply isn't a cloud storage cabinet. It's a real-time routing conduit. Below is exactly
+            how your file is protected, bundled, and delivered natively in your browser.
           </p>
         </div>
 
@@ -265,7 +265,7 @@ function HowPage() {
             </div>
             <h3 className="mt-4 text-lg font-semibold">Zero-Knowledge Architecture</h3>
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-              ClearDrop holds a zero-knowledge posture. Our server coordinates connection handshakes
+              Droply holds a zero-knowledge posture. Our server coordinates connection handshakes
               (`offers` and `answers`), signaling, and presence states. It never sees, logs, or
               coordinates any single byte of the files themselves. Your content remains yours.
             </p>
@@ -316,11 +316,11 @@ function HowPage() {
               <div className="flex h-6 w-6 items-center justify-center rounded-md bg-gradient-primary">
                 <Send className="h-3 w-3 text-primary-foreground" />
               </div>
-              <span className="font-medium text-foreground">ClearDrop</span>
+              <span className="font-medium text-foreground">Droply</span>
               <span className="text-muted-foreground">· Fast. Private. Temporary.</span>
             </div>
             <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()} ClearDrop · Part of the LanDecs ecosystem.
+              © {new Date().getFullYear()} Droply · Part of the LanDecs ecosystem.
             </p>
           </div>
 
