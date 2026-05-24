@@ -370,22 +370,45 @@ export function startSender(shareId: string, file: File, events: SenderEvents = 
       if (s === "connected" || s === "completed") {
         startStatsMonitoring();
       }
-      if (s === "failed" || s === "disconnected") {
+      if (s === "disconnected") {
+        events.onReconnect?.();
+      }
+      if (s === "failed") {
         stopStatsMonitoring();
         // Wait briefly, then attempt reconnect (receiver will re-hello).
         setTimeout(() => {
-          if (cancelled || pc?.iceConnectionState === "connected") return;
+          if (
+            cancelled ||
+            pc?.iceConnectionState === "connected" ||
+            pc?.connectionState === "connected"
+          )
+            return;
           events.onReconnect?.();
           startPeer().catch((e) => events.onError?.(String(e)));
-        }, 2000);
+        }, 3000);
       }
     };
     pc.onconnectionstatechange = () => {
       logStates("onconnectionstatechange");
-      if (pc?.connectionState === "connected") {
+      const s = pc?.connectionState;
+      if (s === "connected") {
         startStatsMonitoring();
-      } else if (pc?.connectionState === "failed" || pc?.connectionState === "disconnected") {
+      }
+      if (s === "disconnected") {
+        events.onReconnect?.();
+      }
+      if (s === "failed") {
         stopStatsMonitoring();
+        setTimeout(() => {
+          if (
+            cancelled ||
+            pc?.iceConnectionState === "connected" ||
+            pc?.connectionState === "connected"
+          )
+            return;
+          events.onReconnect?.();
+          startPeer().catch((e) => events.onError?.(String(e)));
+        }, 3000);
       }
     };
     pc.onicegatheringstatechange = () => {
@@ -601,9 +624,11 @@ export function startSender(shareId: string, file: File, events: SenderEvents = 
         (!connState || ["new", "connecting", "connected"].includes(connState)) &&
         (!iceState || ["new", "checking", "connected", "completed"].includes(iceState));
 
+      const isDataChannelConnected = dc && dc.readyState === "open";
+
       // Guard: do not restart if we are already active & connected or negotiating,
-      // UNLESS this is a brand new receiver session.
-      if (isNegotiating && recId && recId === lastReceiverSessionId) {
+      // UNLESS this is a brand new receiver session, OR our data channel is NOT open yet.
+      if (isNegotiating && isDataChannelConnected && recId && recId === lastReceiverSessionId) {
         console.log("Sender is already connected or negotiating this session, ignoring loop hello");
         return;
       }
@@ -919,10 +944,12 @@ export function startReceiver(
       }
       const connState = pc?.connectionState;
       const iceState = pc?.iceConnectionState;
+      const validConn = ["new", "connecting", "connected", "disconnected"];
+      const validIce = ["new", "checking", "connected", "completed", "disconnected"];
       const isConnectingOrConnected =
         pc &&
-        (!connState || ["new", "connecting", "connected"].includes(connState)) &&
-        (!iceState || ["new", "checking", "connected", "completed"].includes(iceState));
+        (!connState || validConn.includes(connState)) &&
+        (!iceState || validIce.includes(iceState));
 
       if (!pc || !isConnectingOrConnected) {
         requestHello();
@@ -983,21 +1010,44 @@ export function startReceiver(
           if (s === "connected" || s === "completed") {
             startStatsMonitoring();
           }
-          if (s === "failed" || s === "disconnected") {
+          if (s === "disconnected") {
+            events.onReconnect?.();
+          }
+          if (s === "failed") {
             stopStatsMonitoring();
             setTimeout(() => {
-              if (cancelled || pc?.iceConnectionState === "connected") return;
+              if (
+                cancelled ||
+                pc?.iceConnectionState === "connected" ||
+                pc?.connectionState === "connected"
+              )
+                return;
               events.onReconnect?.();
               startHelloInterval();
-            }, 2000);
+            }, 3000);
           }
         };
         pc.onconnectionstatechange = () => {
           logReceiverStates("onconnectionstatechange");
-          if (pc?.connectionState === "connected") {
+          const s = pc?.connectionState;
+          if (s === "connected") {
             startStatsMonitoring();
-          } else if (pc?.connectionState === "failed" || pc?.connectionState === "disconnected") {
+          }
+          if (s === "disconnected") {
+            events.onReconnect?.();
+          }
+          if (s === "failed") {
             stopStatsMonitoring();
+            setTimeout(() => {
+              if (
+                cancelled ||
+                pc?.iceConnectionState === "connected" ||
+                pc?.connectionState === "connected"
+              )
+                return;
+              events.onReconnect?.();
+              startHelloInterval();
+            }, 3000);
           }
         };
         pc.onicegatheringstatechange = () => {
