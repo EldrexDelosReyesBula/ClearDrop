@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "vite build",
+  "buildCommand": "NITRO_PRESET=vercel vite build",
   "outputDirectory": ".vercel/output",
   "framework": "tanstack-start"
 }
