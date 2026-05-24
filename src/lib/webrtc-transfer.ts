@@ -71,15 +71,20 @@ export function getIceConfig(): RTCConfiguration {
   return ICE;
 }
 
-function lowerRelayPriority(candStr: string): string {
+function lowerRelayPriority(candStr: string, isHostCandidateDetected: boolean = false): string {
   try {
+    if (!candStr) return candStr;
     const parts = candStr.split(" ");
     if (parts.length > 3) {
-      parts[3] = "1"; // set priority field to 1
+      if (candStr.includes("typ relay")) {
+        parts[3] = "1"; // set priority field to 1
+      } else if (isHostCandidateDetected && candStr.includes("typ srflx")) {
+        parts[3] = "10"; // Lower STUN priority when host candidate is detected
+      }
     }
     return parts.join(" ");
   } catch (e) {
-    console.error("Failed to lower relay priority", e);
+    console.error("Failed to lower non-host priority", e);
     return candStr;
   }
 }
@@ -349,8 +354,8 @@ export function startSender(shareId: string, file: File, events: SenderEvents = 
         if (candStr && candStr.includes("typ host")) {
           hasHostCandidate = true;
         }
-        if (hasHostCandidate && candStr && candStr.includes("typ relay")) {
-          candStr = lowerRelayPriority(candStr);
+        if (candStr && (candStr.includes("typ relay") || (hasHostCandidate && candStr.includes("typ srflx")))) {
+          candStr = lowerRelayPriority(candStr, hasHostCandidate);
         }
         const candidateInit: RTCIceCandidateInit = {
           candidate: candStr,
@@ -653,10 +658,10 @@ export function startSender(shareId: string, file: File, events: SenderEvents = 
             if (cand.candidate.includes("typ host")) {
               hasHostCandidate = true;
             }
-            if (hasHostCandidate && cand.candidate.includes("typ relay")) {
+            if (cand.candidate.includes("typ relay") || (hasHostCandidate && cand.candidate.includes("typ srflx"))) {
               cand = {
                 ...cand,
-                candidate: lowerRelayPriority(cand.candidate),
+                candidate: lowerRelayPriority(cand.candidate, hasHostCandidate),
               };
             }
           }
@@ -673,10 +678,10 @@ export function startSender(shareId: string, file: File, events: SenderEvents = 
               if (cand.candidate.includes("typ host")) {
                 hasHostCandidate = true;
               }
-              if (hasHostCandidate && cand.candidate.includes("typ relay")) {
+              if (cand.candidate.includes("typ relay") || (hasHostCandidate && cand.candidate.includes("typ srflx"))) {
                 cand = {
                   ...cand,
-                  candidate: lowerRelayPriority(cand.candidate),
+                  candidate: lowerRelayPriority(cand.candidate, hasHostCandidate),
                 };
               }
             }
@@ -699,10 +704,10 @@ export function startSender(shareId: string, file: File, events: SenderEvents = 
         if (cand.candidate.includes("typ host")) {
           hasHostCandidate = true;
         }
-        if (hasHostCandidate && cand.candidate.includes("typ relay")) {
+        if (cand.candidate.includes("typ relay") || (hasHostCandidate && cand.candidate.includes("typ srflx"))) {
           cand = {
             ...cand,
-            candidate: lowerRelayPriority(cand.candidate),
+            candidate: lowerRelayPriority(cand.candidate, hasHostCandidate),
           };
         }
       }
@@ -950,8 +955,8 @@ export function startReceiver(
             if (candStr && candStr.includes("typ host")) {
               hasHostCandidate = true;
             }
-            if (hasHostCandidate && candStr && candStr.includes("typ relay")) {
-              candStr = lowerRelayPriority(candStr);
+            if (candStr && (candStr.includes("typ relay") || (hasHostCandidate && candStr.includes("typ srflx")))) {
+              candStr = lowerRelayPriority(candStr, hasHostCandidate);
             }
             const candidateInit: RTCIceCandidateInit = {
               candidate: candStr,
@@ -1015,10 +1020,10 @@ export function startReceiver(
             if (cand.candidate.includes("typ host")) {
               hasHostCandidate = true;
             }
-            if (hasHostCandidate && cand.candidate.includes("typ relay")) {
+            if (cand.candidate.includes("typ relay") || (hasHostCandidate && cand.candidate.includes("typ srflx"))) {
               cand = {
                 ...cand,
-                candidate: lowerRelayPriority(cand.candidate),
+                candidate: lowerRelayPriority(cand.candidate, hasHostCandidate),
               };
             }
           }
@@ -1035,10 +1040,10 @@ export function startReceiver(
               if (cand.candidate.includes("typ host")) {
                 hasHostCandidate = true;
               }
-              if (hasHostCandidate && cand.candidate.includes("typ relay")) {
+              if (cand.candidate.includes("typ relay") || (hasHostCandidate && cand.candidate.includes("typ srflx"))) {
                 cand = {
                   ...cand,
-                  candidate: lowerRelayPriority(cand.candidate),
+                  candidate: lowerRelayPriority(cand.candidate, hasHostCandidate),
                 };
               }
             }
@@ -1064,10 +1069,10 @@ export function startReceiver(
         if (cand.candidate.includes("typ host")) {
           hasHostCandidate = true;
         }
-        if (hasHostCandidate && cand.candidate.includes("typ relay")) {
+        if (cand.candidate.includes("typ relay") || (hasHostCandidate && cand.candidate.includes("typ srflx"))) {
           cand = {
             ...cand,
-            candidate: lowerRelayPriority(cand.candidate),
+            candidate: lowerRelayPriority(cand.candidate, hasHostCandidate),
           };
         }
       }
