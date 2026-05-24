@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "@/lib/router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import QRCode from "qrcode";
 import {
@@ -50,19 +50,6 @@ import {
 } from "@/lib/transfer-store";
 import { startSender, watchReceiverActivity } from "@/lib/webrtc-transfer";
 import { PrivacyModal, TermsModal, DonationButton } from "@/components/LegalModals";
-
-export const Route = createFileRoute("/app")({
-  head: () => ({
-    meta: [
-      { title: "Droply · Web App" },
-      {
-        name: "description",
-        content: "Drop a file. Get a secure link or QR. It self-destructs.",
-      },
-    ],
-  }),
-  component: AppPage,
-});
 
 const TTL_OPTIONS = [
   { label: "5 min", ms: 5 * 60 * 1000 },
@@ -191,8 +178,12 @@ function estimateCompressionSaving(name: string, size: number, type: string) {
   return { pct: 15, bytesSec: size * 0.15 };
 }
 
-function AppPage() {
+export default function AppPage() {
   const [sessions, setSessions] = useState<ShareSession[]>([]);
+
+  useEffect(() => {
+    document.title = "Droply · Web App";
+  }, []);
   const [dragging, setDragging] = useState(false);
   const [ttlMs, setTtlMs] = useState(TTL_OPTIONS[1].ms);
   const [limitDownloads, setLimitDownloads] = useState(true);
@@ -897,177 +888,183 @@ function AppPage() {
 
       {showLimitModal && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-md animate-fade-in"
+          className="fixed inset-0 z-50 bg-background/50 backdrop-blur-sm flex lg:justify-end justify-center overflow-y-auto lg:overflow-hidden animate-fade-in"
           onClick={() => setShowLimitModal(false)}
         >
           <div
-            className="relative w-full max-w-sm rounded-3xl border border-border bg-gradient-surface p-6 shadow-glow"
+            className="relative w-full min-h-[100dvh] lg:h-full lg:min-h-0 bg-background lg:bg-gradient-surface border-0 lg:border-l border-border flex flex-col justify-between shadow-2xl lg:w-[460px] p-6 lg:p-8 animate-slide-in-bottom lg:animate-slide-in-right overflow-y-auto shrink-0"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              onClick={() => setShowLimitModal(false)}
-              className="absolute right-4 top-4 rounded-full p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition cursor-pointer"
-              aria-label="Close modal"
-            >
-              <X className="h-4 w-4" />
-            </button>
-
-            <div className="flex items-center gap-2.5">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary animate-pulse">
-                <Smartphone className="h-5 w-5" />
-              </div>
-              <div className="text-left">
-                <h3 className="text-lg font-bold">Advanced Settings</h3>
-                <p className="text-xs text-muted-foreground">
-                  Transfers limiters and TURN router setup
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-6 space-y-4">
-              <div className="flex items-center justify-between rounded-xl border border-border bg-card/40 p-3 animate-fade-in">
-                <div className="flex flex-col text-left">
-                  <span className="text-sm font-semibold">Enable Limit</span>
-                  <span className="text-[11px] text-muted-foreground">
-                    Restrict downloading devices
-                  </span>
-                </div>
-                <input
-                  type="checkbox"
-                  checked={limitDownloads}
-                  onChange={(e) => setLimitDownloads(e.target.checked)}
-                  className="h-5 w-5 cursor-pointer accent-[var(--color-primary)] rounded border-border bg-background"
-                />
-              </div>
-
-              <div className="flex items-center justify-between rounded-xl border border-border bg-card/40 p-3 animate-fade-in">
-                <div className="flex flex-col text-left">
-                  <span className="text-sm font-semibold">Auto-Revoke Session</span>
-                  <span className="text-[11px] text-muted-foreground">
-                    Revoke session immediately on first download
-                  </span>
-                </div>
-                <input
-                  type="checkbox"
-                  checked={autoRevoke}
-                  onChange={(e) => setAutoRevoke(e.target.checked)}
-                  className="h-5 w-5 cursor-pointer accent-[var(--color-primary)] rounded border-border bg-background"
-                />
-              </div>
-
-              <div
-                className="flex items-center justify-between rounded-xl border border-border bg-card/40 p-3 animate-fade-in"
-                id="settings-auto-copy-toggle"
-              >
-                <div className="flex flex-col text-left">
-                  <span className="text-sm font-semibold">Auto-Copy Share Link</span>
-                  <span className="text-[11px] text-muted-foreground">
-                    Copy share link to clipboard on file drops
-                  </span>
-                </div>
-                <input
-                  type="checkbox"
-                  checked={autoCopyToClipboard}
-                  onChange={(e) => setAutoCopyToClipboard(e.target.checked)}
-                  className="h-5 w-5 cursor-pointer accent-[var(--color-primary)] rounded border-border bg-background"
-                />
-              </div>
-
-              <div
-                className="flex items-center justify-between rounded-xl border border-border bg-card/40 p-3 animate-fade-in"
-                id="settings-battery-saver-toggle"
-              >
-                <div className="flex flex-col text-left">
-                  <span className="text-sm font-semibold">Battery Saver Mode</span>
-                  <span className="text-[11px] text-muted-foreground">
-                    Reduce CPU usage via less frequent connection stats polls
-                  </span>
-                </div>
-                <input
-                  type="checkbox"
-                  checked={batterySaver}
-                  onChange={(e) => setBatterySaver(e.target.checked)}
-                  className="h-5 w-5 cursor-pointer accent-[var(--color-primary)] rounded border-border bg-background"
-                />
-              </div>
-
-              {limitDownloads && (
-                <div className="space-y-2 text-left animate-fade-in">
-                  <label className="text-xs font-semibold text-muted-foreground block uppercase tracking-wider">
-                    Select Max Receivers
-                  </label>
-                  <div className="grid grid-cols-5 gap-1.5">
-                    {[1, 2, 5, 10, 25].map((val) => (
-                      <button
-                        key={val}
-                        type="button"
-                        onClick={() => setMaxDownloadsVal(val)}
-                        className={`rounded-xl border p-2 font-mono text-xs font-semibold transition cursor-pointer ${
-                          maxDownloadsVal === val
-                            ? "border-primary bg-primary/20 text-foreground shadow-[0_0_12px_rgba(59,130,246,0.25)]"
-                            : "border-border bg-card/30 text-muted-foreground hover:bg-card/50"
-                        }`}
-                      >
-                        {val === 1 ? "1×" : `${val}`}
-                      </button>
-                    ))}
+            <div>
+              <div className="flex items-center justify-between pb-4 border-b border-border/40">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary animate-pulse shrink-0">
+                    <Smartphone className="h-5 w-5" />
+                  </div>
+                  <div className="text-left">
+                    <h3 className="text-lg font-bold">Advanced Settings</h3>
+                    <p className="text-xs text-muted-foreground">
+                      Transfers limiters and TURN router setup
+                    </p>
                   </div>
                 </div>
-              )}
-
-              <div className="space-y-2 text-left pt-2 border-t border-border/40">
-                <label className="text-xs font-semibold text-muted-foreground block uppercase tracking-wider">
-                  Custom TURN Servers (Optional)
-                </label>
-                <p className="text-[10px] text-muted-foreground leading-normal mb-1.5">
-                  Input custom iceServers JSON object below to use your own TURN routing servers:
-                </p>
-                <textarea
-                  value={customTurn}
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    setCustomTurn(val);
-                    if (!val.trim()) {
-                      localStorage.removeItem("cleardrop_custom_turn");
-                    } else {
-                      try {
-                        const parsed = JSON.parse(val);
-                        if (parsed && Array.isArray(parsed.iceServers)) {
-                          localStorage.setItem("cleardrop_custom_turn", val);
-                        }
-                      } catch {
-                        // Keep typing safely
-                      }
-                    }
-                  }}
-                  placeholder='{"iceServers": [{"urls": "turn:your-server.com:3478", "username": "user", "credential": "pw"}]}'
-                  className="w-full h-20 rounded-xl border border-border bg-card/40 p-2 text-[10px] font-mono outline-none focus:border-primary/60 transition block resize-none placeholder:text-muted-foreground/55"
-                />
-                <p className="text-[9px] text-muted-foreground leading-normal italic text-right select-none">
-                  * Empty falls back to Droply built-in TURN network
-                </p>
+                <button
+                  onClick={() => setShowLimitModal(false)}
+                  className="rounded-full p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition cursor-pointer"
+                  aria-label="Close modal"
+                >
+                  <X className="h-5 w-5" />
+                </button>
               </div>
 
-              <div className="rounded-xl border border-border/40 bg-background/30 p-3 text-xs text-left text-muted-foreground leading-snug space-y-1.5 font-sans">
-                <p>
-                  * Droply utilizes{" "}
-                  <strong className="text-foreground">Google public STUN servers</strong> to
-                  discover public WAN IP addresses for real-time direct P2P connection coordinates.
-                </p>
-                <p>
-                  * Direct P2P pathways automatically match local LAN speeds when on the same
-                  network. Symmetric-NAT firewalls may restrict direct WAN linkups, falling back
-                  safely to encrypted Cloud Relay TURN routing.
-                </p>
+              <div className="mt-6 space-y-4">
+                <div className="flex items-center justify-between rounded-xl border border-border bg-card/40 p-3 animate-fade-in">
+                  <div className="flex flex-col text-left">
+                    <span className="text-sm font-semibold">Enable Limit</span>
+                    <span className="text-[11px] text-muted-foreground">
+                      Restrict downloading devices
+                    </span>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={limitDownloads}
+                    onChange={(e) => setLimitDownloads(e.target.checked)}
+                    className="h-5 w-5 cursor-pointer accent-[var(--color-primary)] rounded border-border bg-background"
+                  />
+                </div>
+
+                <div className="flex items-center justify-between rounded-xl border border-border bg-card/40 p-3 animate-fade-in">
+                  <div className="flex flex-col text-left">
+                    <span className="text-sm font-semibold">Auto-Revoke Session</span>
+                    <span className="text-[11px] text-muted-foreground">
+                      Revoke session immediately on first download
+                    </span>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={autoRevoke}
+                    onChange={(e) => setAutoRevoke(e.target.checked)}
+                    className="h-5 w-5 cursor-pointer accent-[var(--color-primary)] rounded border-border bg-background"
+                  />
+                </div>
+
+                <div
+                  className="flex items-center justify-between rounded-xl border border-border bg-card/40 p-3 animate-fade-in"
+                  id="settings-auto-copy-toggle"
+                >
+                  <div className="flex flex-col text-left">
+                    <span className="text-sm font-semibold">Auto-Copy Share Link</span>
+                    <span className="text-[11px] text-muted-foreground">
+                      Copy share link to clipboard on file drops
+                    </span>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={autoCopyToClipboard}
+                    onChange={(e) => setAutoCopyToClipboard(e.target.checked)}
+                    className="h-5 w-5 cursor-pointer accent-[var(--color-primary)] rounded border-border bg-background"
+                  />
+                </div>
+
+                <div
+                  className="flex items-center justify-between rounded-xl border border-border bg-card/40 p-3 animate-fade-in"
+                  id="settings-battery-saver-toggle"
+                >
+                  <div className="flex flex-col text-left">
+                    <span className="text-sm font-semibold">Battery Saver Mode</span>
+                    <span className="text-[11px] text-muted-foreground">
+                      Reduce CPU usage via less frequent connection stats polls
+                    </span>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={batterySaver}
+                    onChange={(e) => setBatterySaver(e.target.checked)}
+                    className="h-5 w-5 cursor-pointer accent-[var(--color-primary)] rounded border-border bg-background"
+                  />
+                </div>
+
+                {limitDownloads && (
+                  <div className="space-y-2 text-left animate-fade-in">
+                    <label className="text-xs font-semibold text-muted-foreground block uppercase tracking-wider">
+                      Select Max Receivers
+                    </label>
+                    <div className="grid grid-cols-5 gap-1.5">
+                      {[1, 2, 5, 10, 25].map((val) => (
+                        <button
+                          key={val}
+                          type="button"
+                          onClick={() => setMaxDownloadsVal(val)}
+                          className={`rounded-xl border p-2 font-mono text-xs font-semibold transition cursor-pointer ${
+                            maxDownloadsVal === val
+                              ? "border-primary bg-primary/20 text-foreground shadow-[0_0_12px_rgba(59,130,246,0.25)]"
+                              : "border-border bg-card/30 text-muted-foreground hover:bg-card/50"
+                          }`}
+                        >
+                          {val === 1 ? "1×" : `${val}`}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div className="space-y-2 text-left pt-2 border-t border-border/40">
+                  <label className="text-xs font-semibold text-muted-foreground block uppercase tracking-wider">
+                    Custom TURN Servers (Optional)
+                  </label>
+                  <p className="text-[10px] text-muted-foreground leading-normal mb-1.5">
+                    Input custom iceServers JSON object below to use your own TURN routing servers:
+                  </p>
+                  <textarea
+                    value={customTurn}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setCustomTurn(val);
+                      if (!val.trim()) {
+                        localStorage.removeItem("cleardrop_custom_turn");
+                      } else {
+                        try {
+                          const parsed = JSON.parse(val);
+                          if (parsed && Array.isArray(parsed.iceServers)) {
+                            localStorage.setItem("cleardrop_custom_turn", val);
+                          }
+                        } catch {
+                          // Keep typing safely
+                        }
+                      }
+                    }}
+                    placeholder='{"iceServers": [{"urls": "turn:your-server.com:3478", "username": "user", "credential": "pw"}]}'
+                    className="w-full h-20 rounded-xl border border-border bg-card/40 p-2 text-[10px] font-mono outline-none focus:border-primary/60 transition block resize-none placeholder:text-muted-foreground/55"
+                  />
+                  <p className="text-[9px] text-muted-foreground leading-normal italic text-right select-none">
+                    * Empty falls back to Droply built-in TURN network
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-border/40 bg-background/30 p-3 text-xs text-left text-muted-foreground leading-snug space-y-1.5 font-sans">
+                  <p>
+                    * Droply utilizes{" "}
+                    <strong className="text-foreground">Google public STUN servers</strong> to
+                    discover public WAN IP addresses for real-time direct P2P connection
+                    coordinates.
+                  </p>
+                  <p>
+                    * Direct P2P pathways automatically match local LAN speeds when on the same
+                    network. Symmetric-NAT firewalls may restrict direct WAN linkups, falling back
+                    safely to encrypted Cloud Relay TURN routing.
+                  </p>
+                </div>
               </div>
             </div>
 
-            <button
-              onClick={() => setShowLimitModal(false)}
-              className="mt-6 w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90 transition shadow-glow cursor-pointer"
-            >
-              Apply Settings
-            </button>
+            <div className="mt-8 pt-4 border-t border-border/40 shrink-0">
+              <button
+                onClick={() => setShowLimitModal(false)}
+                className="w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90 transition shadow-glow cursor-pointer"
+              >
+                Apply Settings
+              </button>
+            </div>
           </div>
         </div>
       )}

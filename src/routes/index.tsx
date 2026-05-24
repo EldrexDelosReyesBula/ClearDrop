@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { useNavigate, Link } from "@/lib/router";
 import { useCallback, useRef, useState, useEffect } from "react";
 import { makeId, putBlob, loadSessions, saveSessions, ShareSession } from "@/lib/transfer-store";
 import {
@@ -20,32 +20,6 @@ import {
   X,
 } from "lucide-react";
 import { PrivacyModal, TermsModal, DonationButton } from "@/components/LegalModals";
-
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Droply — Fast, Private, Temporary Encrypted File Sharing" },
-      {
-        name: "description",
-        content:
-          "Share files instantly and securely with peer-to-peer WebRTC technology. No accounts, no intermediate servers, zero logs, end-to-end AES-GCM 256-bit encrypted streams.",
-      },
-      {
-        name: "keywords",
-        content:
-          "file sharing, WebRTC p2p transfer, secure file drop, private sharing online, anonymous file send, temporary links, no account file share",
-      },
-      { property: "og:title", content: "Droply — Secure Browser-Based Ephemeral Shares" },
-      {
-        property: "og:description",
-        content:
-          "Symmetrically encrypted direct routing transfers that leave absolutely zero cloud footprint.",
-      },
-      { name: "robots", content: "index, follow" },
-    ],
-  }),
-  component: Index,
-});
 
 function Nav({
   onOpenPrivacy,
@@ -715,9 +689,13 @@ function Footer({
   );
 }
 
-function Index() {
+export default function Index() {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
+
+  useEffect(() => {
+    document.title = "Droply — Fast, Private, Temporary Encrypted File Sharing";
+  }, []);
 
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-background text-foreground">

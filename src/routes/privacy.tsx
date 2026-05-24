@@ -1,25 +1,16 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { Link } from "@/lib/router";
+import { useState, useEffect } from "react";
 import { Send, ArrowRight, ShieldCheck, Lock, EyeOff, Menu, X } from "lucide-react";
 import { PrivacyModal, TermsModal, DonationButton } from "@/components/LegalModals";
 
-export const Route = createFileRoute("/privacy")({
-  head: () => ({
-    meta: [
-      { title: "Droply — Privacy Policy" },
-      {
-        name: "description",
-        content: "Our zero-knowledge, end-to-end encrypted privacy guidelines.",
-      },
-    ],
-  }),
-  component: PrivacyPage,
-});
-
-function PrivacyPage() {
+export default function PrivacyPage() {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = "Droply — Privacy Policy";
+  }, []);
 
   return (
     <main className="relative min-h-screen bg-background text-foreground flex flex-col justify-between">

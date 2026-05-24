@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "@/lib/router";
 import {
   Send,
   Wifi,
@@ -12,39 +12,17 @@ import {
   Menu,
   X,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PrivacyModal, TermsModal, DonationButton } from "@/components/LegalModals";
 
-export const Route = createFileRoute("/features")({
-  head: () => ({
-    meta: [
-      { title: "Droply — Advanced Features for Ultra-Secure File Transfer" },
-      {
-        name: "description",
-        content:
-          "Experience the list of our security-hardened file exchange highlights. Includes automated self-destruction, password-gated handshakes, local LAN pairing, and no IP trackers.",
-      },
-      {
-        name: "keywords",
-        content:
-          "secure online transfer features, self destruct link sharing, device qr connect, no tracker file sharing, private download buffer",
-      },
-      { property: "og:title", content: "Droply — Core Security Sharing Features" },
-      {
-        property: "og:description",
-        content:
-          "All features of Droply are focused purely around speed, secure storage isolation, and zero logs tracking. Read details here.",
-      },
-      { name: "robots", content: "index, follow" },
-    ],
-  }),
-  component: FeaturesPage,
-});
-
-function FeaturesPage() {
+export default function FeaturesPage() {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = "Droply — Advanced Features for Ultra-Secure File Transfer";
+  }, []);
 
   const featureCards = [
     {

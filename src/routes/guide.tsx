@@ -1,5 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { Link } from "@/lib/router";
+import { useState, useEffect } from "react";
 import {
   QrCode,
   Wifi,
@@ -21,22 +21,12 @@ import {
 } from "lucide-react";
 import { DonationButton } from "@/components/LegalModals";
 
-export const Route = createFileRoute("/guide")({
-  head: () => ({
-    meta: [
-      { title: "Droply · How to send a photo" },
-      {
-        name: "description",
-        content:
-          "Step-by-step picture guides for sending photos with QR, Wi-Fi/hotspot, or Bluetooth — no tech skills needed.",
-      },
-    ],
-  }),
-  component: GuidePage,
-});
-
-function GuidePage() {
+export default function GuidePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = "Droply · How to send a photo";
+  }, []);
 
   return (
     <main className="relative min-h-screen bg-background text-foreground">

@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "@/lib/router";
 import {
   Send,
   Upload,
@@ -15,39 +15,17 @@ import {
   Menu,
   X,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PrivacyModal, TermsModal, DonationButton } from "@/components/LegalModals";
 
-export const Route = createFileRoute("/how")({
-  head: () => ({
-    meta: [
-      { title: "Droply — How Direct Peer-to-Peer Encrypted Transfer Works" },
-      {
-        name: "description",
-        content:
-          "Explore the engineering behind our decentralized file transfer engine. Learn how WebRTC data channels, ECDH handshakes, and AES-GCM 256 encryption keep your files completely private.",
-      },
-      {
-        name: "keywords",
-        content:
-          "how webRTC works, peer-to-peer transfer tech, ECDH key agreement, AES-GCM 256 file sharing, secure communications sandbox, private browser stream",
-      },
-      { property: "og:title", content: "Droply — How Direct Peer Sharing Works" },
-      {
-        property: "og:description",
-        content:
-          "Symmetrically encrypted direct routing transfers that bypass intermediate servers entirely. Purely browser-based and secure.",
-      },
-      { name: "robots", content: "index, follow" },
-    ],
-  }),
-  component: HowPage,
-});
-
-function HowPage() {
+export default function HowPage() {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = "Droply — How Direct Peer-to-Peer Encrypted Transfer Works";
+  }, []);
 
   return (
     <main className="relative min-h-screen bg-background text-foreground flex flex-col justify-between">

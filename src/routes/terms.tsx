@@ -1,25 +1,16 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { Link } from "@/lib/router";
+import { useState, useEffect } from "react";
 import { Send, ArrowRight, FileText, Menu, X, Gift, ExternalLink } from "lucide-react";
 import { PrivacyModal, TermsModal, DonationButton } from "@/components/LegalModals";
 
-export const Route = createFileRoute("/terms")({
-  head: () => ({
-    meta: [
-      { title: "Droply — Terms of Use" },
-      {
-        name: "description",
-        content: "Decentralized file transport and responsibility details.",
-      },
-    ],
-  }),
-  component: TermsPage,
-});
-
-function TermsPage() {
+export default function TermsPage() {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = "Droply — Terms of Use";
+  }, []);
 
   return (
     <main className="relative min-h-screen bg-background text-foreground flex flex-col justify-between">

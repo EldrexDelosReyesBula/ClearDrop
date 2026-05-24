@@ -153,3 +153,30 @@
 .animate-progress-appear {
   animation: progress-appear 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-bottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-in-bottom {
+  animation: slide-in-bottom 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+

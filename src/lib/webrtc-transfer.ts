@@ -354,7 +354,10 @@ export function startSender(shareId: string, file: File, events: SenderEvents = 
         if (candStr && candStr.includes("typ host")) {
           hasHostCandidate = true;
         }
-        if (candStr && (candStr.includes("typ relay") || (hasHostCandidate && candStr.includes("typ srflx")))) {
+        if (
+          candStr &&
+          (candStr.includes("typ relay") || (hasHostCandidate && candStr.includes("typ srflx")))
+        ) {
           candStr = lowerRelayPriority(candStr, hasHostCandidate);
         }
         const candidateInit: RTCIceCandidateInit = {
@@ -658,7 +661,10 @@ export function startSender(shareId: string, file: File, events: SenderEvents = 
             if (cand.candidate.includes("typ host")) {
               hasHostCandidate = true;
             }
-            if (cand.candidate.includes("typ relay") || (hasHostCandidate && cand.candidate.includes("typ srflx"))) {
+            if (
+              cand.candidate.includes("typ relay") ||
+              (hasHostCandidate && cand.candidate.includes("typ srflx"))
+            ) {
               cand = {
                 ...cand,
                 candidate: lowerRelayPriority(cand.candidate, hasHostCandidate),
@@ -678,7 +684,10 @@ export function startSender(shareId: string, file: File, events: SenderEvents = 
               if (cand.candidate.includes("typ host")) {
                 hasHostCandidate = true;
               }
-              if (cand.candidate.includes("typ relay") || (hasHostCandidate && cand.candidate.includes("typ srflx"))) {
+              if (
+                cand.candidate.includes("typ relay") ||
+                (hasHostCandidate && cand.candidate.includes("typ srflx"))
+              ) {
                 cand = {
                   ...cand,
                   candidate: lowerRelayPriority(cand.candidate, hasHostCandidate),
@@ -704,7 +713,10 @@ export function startSender(shareId: string, file: File, events: SenderEvents = 
         if (cand.candidate.includes("typ host")) {
           hasHostCandidate = true;
         }
-        if (cand.candidate.includes("typ relay") || (hasHostCandidate && cand.candidate.includes("typ srflx"))) {
+        if (
+          cand.candidate.includes("typ relay") ||
+          (hasHostCandidate && cand.candidate.includes("typ srflx"))
+        ) {
           cand = {
             ...cand,
             candidate: lowerRelayPriority(cand.candidate, hasHostCandidate),
@@ -955,7 +967,10 @@ export function startReceiver(
             if (candStr && candStr.includes("typ host")) {
               hasHostCandidate = true;
             }
-            if (candStr && (candStr.includes("typ relay") || (hasHostCandidate && candStr.includes("typ srflx")))) {
+            if (
+              candStr &&
+              (candStr.includes("typ relay") || (hasHostCandidate && candStr.includes("typ srflx")))
+            ) {
               candStr = lowerRelayPriority(candStr, hasHostCandidate);
             }
             const candidateInit: RTCIceCandidateInit = {
@@ -1020,7 +1035,10 @@ export function startReceiver(
             if (cand.candidate.includes("typ host")) {
               hasHostCandidate = true;
             }
-            if (cand.candidate.includes("typ relay") || (hasHostCandidate && cand.candidate.includes("typ srflx"))) {
+            if (
+              cand.candidate.includes("typ relay") ||
+              (hasHostCandidate && cand.candidate.includes("typ srflx"))
+            ) {
               cand = {
                 ...cand,
                 candidate: lowerRelayPriority(cand.candidate, hasHostCandidate),
@@ -1040,7 +1058,10 @@ export function startReceiver(
               if (cand.candidate.includes("typ host")) {
                 hasHostCandidate = true;
               }
-              if (cand.candidate.includes("typ relay") || (hasHostCandidate && cand.candidate.includes("typ srflx"))) {
+              if (
+                cand.candidate.includes("typ relay") ||
+                (hasHostCandidate && cand.candidate.includes("typ srflx"))
+              ) {
                 cand = {
                   ...cand,
                   candidate: lowerRelayPriority(cand.candidate, hasHostCandidate),
@@ -1069,7 +1090,10 @@ export function startReceiver(
         if (cand.candidate.includes("typ host")) {
           hasHostCandidate = true;
         }
-        if (cand.candidate.includes("typ relay") || (hasHostCandidate && cand.candidate.includes("typ srflx"))) {
+        if (
+          cand.candidate.includes("typ relay") ||
+          (hasHostCandidate && cand.candidate.includes("typ srflx"))
+        ) {
           cand = {
             ...cand,
             candidate: lowerRelayPriority(cand.candidate, hasHostCandidate),

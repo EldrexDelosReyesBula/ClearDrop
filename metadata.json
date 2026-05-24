@@ -2,7 +2,5 @@
   "name": "Droply",
   "description": "An instant, lightning-fast peer-to-peer file sharing platform utilizing WebSockets and WebRTC.",
   "requestFramePermissions": [],
-  "majorCapabilities": [
-    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
-  ]
+  "majorCapabilities": []
 }
